@@ -5,6 +5,8 @@ import Card from './components/Card';
 class App extends React.Component {
   constructor() {
     super();
+    this.handleChange = this.handleChange.bind(this);
+
     this.state = {
       cardName: '',
       cardDescription: '',
@@ -15,17 +17,14 @@ class App extends React.Component {
       cardRare: 'Normal',
       cardTrunfo: false,
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name } = target;
-    const value = (target.type === 'checkbox') ? target.checked : target.value;
-
-    this.setState({
-      [name]: value,
-    });
+  handleChange(event) {
+    if (event.target.name === 'cardTrunfo') {
+      this.setState(({ cardTrunfo: event.target.checked }));
+    } else {
+      this.setState(({ [event.target.name]: event.target.value }));
+    }
   }
 
   render() {
