@@ -20,7 +20,7 @@ class Form extends React.Component {
     return (
       <section>
         <form>
-
+          Nome da carta:
           <input
             name="cardName"
             type="text"
@@ -28,7 +28,7 @@ class Form extends React.Component {
             value={ cardName }
             onChange={ onInputChange }
           />
-
+          Descrição:
           <input
             name="cardDescription"
             type="textarea"
@@ -36,7 +36,7 @@ class Form extends React.Component {
             value={ cardDescription }
             onChange={ onInputChange }
           />
-
+          Att 01:
           <input
             name="cardAttr1"
             type="number"
@@ -44,7 +44,7 @@ class Form extends React.Component {
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
-
+          Att 02:
           <input
             name="cardAttr2"
             type="number"
@@ -52,7 +52,7 @@ class Form extends React.Component {
             value={ cardAttr2 }
             onChange={ onInputChange }
           />
-
+          Att03:
           <input
             name="cardAttr3"
             type="number"
@@ -60,7 +60,7 @@ class Form extends React.Component {
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
-
+          URL da imagem:
           <input
             name="cardImage"
             type="text"
@@ -68,7 +68,7 @@ class Form extends React.Component {
             value={ cardImage }
             onChange={ onInputChange }
           />
-
+          Raridade:
           <select
             name="cardRare"
             data-testid="rare-input"
@@ -80,6 +80,7 @@ class Form extends React.Component {
             <option value="muito raro" id="rare-input">Muito raro</option>
           </select>
 
+          Super Trunfo
           <input
             name="cardTrunfo"
             type="checkbox"
@@ -87,7 +88,6 @@ class Form extends React.Component {
             checked={ cardTrunfo }
             onChange={ onInputChange }
           />
-          Super Trunfo
 
           <button
             type="submit"
