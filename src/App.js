@@ -15,7 +15,7 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'Normal',
       cardTrunfo: false,
-      SaveButtonDisabled: true,
+      isSaveButtonDisabled: true,
     };
   }
 
@@ -69,11 +69,11 @@ class App extends React.Component {
 
     if (arrayDeFalsos.length > 0) {
       this.setState({
-        SaveButtonDisabled: true,
+        isSaveButtonDisabled: true,
       });
     } else {
       this.setState({
-        SaveButtonDisabled: false,
+        isSaveButtonDisabled: false,
       });
     }
   }
