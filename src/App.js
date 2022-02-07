@@ -17,6 +17,7 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       arrayCartasSalvas: [],
+      hasTrunfo: false,
     };
   }
 
@@ -81,7 +82,8 @@ class App extends React.Component {
 
   // Aula do instrutor Fernando, que criou um forms com informações dele. Está nos meus salvos no slack.
   // Ele deu a ideia de criar um novo objeto.
-  botaoSalvar = () => {
+  botaoSalvar = (event) => {
+    event.preventDefault();
     const { cardAttr1,
       cardAttr2,
       cardAttr3,
@@ -89,6 +91,7 @@ class App extends React.Component {
       cardDescription,
       cardImage,
       cardRare,
+      cardTrunfo,
     } = this.state;
 
     const objetoCartas = {
@@ -99,6 +102,7 @@ class App extends React.Component {
       cardDescription,
       cardImage,
       cardRare,
+      cardTrunfo,
     };
     // Com esse novo objeto criado, nós podemos pegar todas as cartas salvas (com o ...spread)
     // E adicionar o onjetoCartas, que será a cartal ''atual''. Após isso, vamos retornar os valores ao default, conforme solicitado.
@@ -110,8 +114,14 @@ class App extends React.Component {
     cardName: '',
     cardDescription: '',
     cardImage: '',
+    cardTrunfo: false,
     cardRare: 'Normal' }));
-    // Os valores 0 vem como string, e não como number. Por isso tem que colocar ''.
+
+    if (cardTrunfo === true) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
   }
 
   render() {
@@ -128,8 +138,8 @@ class App extends React.Component {
           { ...this.state }
         />
         <section>
-          { arrayCartasSalvas.map((carta) => (<Card
-            key={ carta.cardName }
+          { arrayCartasSalvas.map((carta, index) => (<Card
+            key={ index }
             { ...carta }
           />))}
         </section>
