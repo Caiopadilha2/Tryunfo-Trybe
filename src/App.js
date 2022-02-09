@@ -138,10 +138,18 @@ class App extends React.Component {
           { ...this.state }
         />
         <section>
-          { arrayCartasSalvas.map((carta, index) => (<Card
-            key={ index }
-            { ...carta }
-          />))}
+          <hr />
+          <h2>Minhas cartas</h2>
+          { arrayCartasSalvas.map((card) => (
+            <div key={ card.cardName }>
+              <Card { ...card } />
+              <button
+                type="button"
+                data-testid="delete-button"
+              >
+                Excluir
+              </button>
+            </div>)) }
         </section>
       </div>
     );
