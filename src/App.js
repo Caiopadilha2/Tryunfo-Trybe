@@ -18,6 +18,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       arrayCartasSalvas: [],
       hasTrunfo: false,
+      inputFiltro: '',
     };
   }
 
@@ -143,7 +144,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { arrayCartasSalvas } = this.state;
+    const { arrayCartasSalvas, inputFiltro } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -158,17 +159,24 @@ class App extends React.Component {
         <section>
           <hr />
           <h2>Minhas cartas</h2>
-          { arrayCartasSalvas.map((card) => (
-            <div key={ card.cardName }>
-              <Card { ...card } />
-              <button
-                type="button"
-                data-testid="delete-button"
-                onClick={ () => this.handleClickDelete(card) }
-              >
-                Excluir
-              </button>
-            </div>)) }
+          <input
+            name="inputFiltro"
+            type="text"
+            data-testid="name-filter"
+            onChange={ this.handleChange }
+          />
+          { arrayCartasSalvas.filter((carta) => carta.cardName.includes(inputFiltro))
+            .map((card) => (
+              <div key={ card.cardName }>
+                <Card { ...card } />
+                <button
+                  type="button"
+                  data-testid="delete-button"
+                  onClick={ () => this.handleClickDelete(card) }
+                >
+                  Excluir
+                </button>
+              </div>)) }
         </section>
       </div>
     );
