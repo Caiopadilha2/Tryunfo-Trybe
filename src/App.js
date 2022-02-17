@@ -19,6 +19,7 @@ class App extends React.Component {
       arrayCartasSalvas: [],
       hasTrunfo: false,
       inputFiltro: '',
+      raridade: 'todas',
     };
   }
 
@@ -144,7 +145,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { arrayCartasSalvas, inputFiltro } = this.state;
+    const { arrayCartasSalvas, inputFiltro, raridade } = this.state;
+    let arrAux = arrayCartasSalvas;
+    if (raridade !== 'todas') {
+      arrAux = arrAux.filter((carta) => carta.cardRare === raridade);
+    }
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -165,7 +170,17 @@ class App extends React.Component {
             data-testid="name-filter"
             onChange={ this.handleChange }
           />
-          { arrayCartasSalvas.filter((carta) => carta.cardName.includes(inputFiltro))
+          <select
+            name="raridade"
+            data-testid="rare-filter"
+            onChange={ this.handleChange }
+          >
+            <option value="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
+          { arrAux.filter((carta) => carta.cardName.includes(inputFiltro))
             .map((card) => (
               <div key={ card.cardName }>
                 <Card { ...card } />
