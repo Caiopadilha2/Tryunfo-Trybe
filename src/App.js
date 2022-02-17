@@ -84,43 +84,61 @@ class App extends React.Component {
   // Ele deu a ideia de criar um novo objeto.
   botaoSalvar = (event) => {
     event.preventDefault();
-    const { cardAttr1,
-      cardAttr2,
-      cardAttr3,
+    const {
       cardName,
       cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
       cardImage,
       cardRare,
       cardTrunfo,
     } = this.state;
 
     const objetoCartas = {
+      cardName,
+      cardDescription,
       cardAttr1,
       cardAttr2,
       cardAttr3,
-      cardName,
-      cardDescription,
       cardImage,
       cardRare,
       cardTrunfo,
     };
     // Com esse novo objeto criado, nós podemos pegar todas as cartas salvas (com o ...spread)
     // E adicionar o onjetoCartas, que será a cartal ''atual''. Após isso, vamos retornar os valores ao default, conforme solicitado.
-    this.setState((prev) => ({ arrayCartasSalvas: [...prev.arrayCartasSalvas,
-      objetoCartas],
-    cardAttr1: '0',
-    cardAttr2: '0',
-    cardAttr3: '0',
-    cardName: '',
-    cardDescription: '',
-    cardImage: '',
-    cardTrunfo: false,
-    cardRare: 'Normal' }));
+    this.setState((prev) => ({
+      arrayCartasSalvas: [...prev.arrayCartasSalvas, objetoCartas],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'Normal',
+      cardTrunfo: false,
+    }));
 
     if (cardTrunfo === true) {
       this.setState({
         hasTrunfo: true,
       });
+    }
+  }
+
+  handleClickDelete = (cartaClicada) => {
+    const { arrayCartasSalvas } = this.state;
+    const newList = arrayCartasSalvas.filter((card) => (card !== cartaClicada));
+    // Guardar na nova lista só as cartas que não foram clicadas.
+    this.setState({
+      arrayCartasSalvas: newList,
+    });
+    // Como a carta que eu cliquei não vai estar mais na nova lista, coloco essa lista no estado. Logo, não será mais renderizado na tela.
+    if (cartaClicada.cardTrunfo === true) {
+      this.setState({
+        hasTrunfo: false,
+      });
+      // Se a carta clicada for supertrunfo, setar o estado para false pois quer dizer que não tem mais nenhum supertrunfo, pois ele foi excluído.
     }
   }
 
@@ -146,6 +164,7 @@ class App extends React.Component {
               <button
                 type="button"
                 data-testid="delete-button"
+                onClick={ () => this.handleClickDelete(card) }
               >
                 Excluir
               </button>
