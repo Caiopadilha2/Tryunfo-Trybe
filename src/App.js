@@ -128,7 +128,7 @@ class App extends React.Component {
     }
   }
 
-  handleClickDelete = (cartaClicada) => {
+  deletarCarta = (cartaClicada) => {
     const { arrayCartasSalvas } = this.state;
     const newList = arrayCartasSalvas.filter((card) => (card !== cartaClicada));
     // Guardar na nova lista só as cartas que não foram clicadas.
@@ -136,6 +136,7 @@ class App extends React.Component {
       arrayCartasSalvas: newList,
     });
     // Como a carta que eu cliquei não vai estar mais na nova lista, coloco essa lista no estado. Logo, não será mais renderizado na tela.
+
     if (cartaClicada.cardTrunfo === true) {
       this.setState({
         hasTrunfo: false,
@@ -150,6 +151,7 @@ class App extends React.Component {
     if (raridade !== 'todas') {
       arrAux = arrAux.filter((carta) => carta.cardRare === raridade);
     }
+
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -180,6 +182,7 @@ class App extends React.Component {
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
+
           { arrAux.filter((carta) => carta.cardName.includes(inputFiltro))
             .map((card) => (
               <div key={ card.cardName }>
@@ -187,7 +190,7 @@ class App extends React.Component {
                 <button
                   type="button"
                   data-testid="delete-button"
-                  onClick={ () => this.handleClickDelete(card) }
+                  onClick={ () => this.deletarCarta(card) }
                 >
                   Excluir
                 </button>
